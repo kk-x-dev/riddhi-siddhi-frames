@@ -33,7 +33,7 @@ export default function CollectionSection({
       <div className="max-w-[1280px] mx-auto px-4 md:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-16">
-          <h2 className="font-serif-deva text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             तुमच्या मनाजवळची प्रतिमा निवडा...
           </h2>
           <p className="font-sans-deva text-sm md:text-base text-secondary max-w-2xl mx-auto leading-relaxed">

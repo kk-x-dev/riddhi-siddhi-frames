@@ -1,8 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Tillana:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #F7F3E8;
+  --background: #fdf3c5;
   --foreground: #202020;
   --secondary-text: #625D54;
   --accent: #C58A35;
@@ -37,8 +38,18 @@ body {
   font-family: "Noto Sans Devanagari", sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: "Noto Serif Devanagari", serif;
+h1, h2 {
+  font-family: 'Tillana', cursive;
+  color:var(--accent);
+}
+
+h3, h4, h5, h6 {
+  font-family: 'Noto Serif Devanagari', serif;
+  color:#A6532D;
+}
+
+p{
+  color:var(--accent-secondary)
 }
 
 /* Scrollbar styling */

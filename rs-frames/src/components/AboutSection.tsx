@@ -29,7 +29,7 @@ export default function AboutSection() {
 
           {/* Content */}
           <div className="md:w-7/12">
-            <h2 className="font-serif-deva text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
               आमची छोटीशी गोष्ट...
             </h2>
 

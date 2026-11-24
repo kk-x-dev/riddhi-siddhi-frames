@@ -57,7 +57,7 @@ export default function Navbar({ onSearch, searchQuery }: NavbarProps) {
               className="flex items-center gap-2"
             >
               <Image
-                src="/images/rslogo.png"
+                src="/images/rsframeslogo.jpg"
                 alt="रिद्धी सिद्धी Frames"
                 width={140}
                 height={140}

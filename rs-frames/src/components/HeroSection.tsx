@@ -19,7 +19,7 @@ export default function HeroSection({ onWhatsAppClick }: HeroSectionProps) {
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
-          src="/images/hero-banner.jpg"
+          src="/images/banner.jpg"
           alt="सुंदर भारतीय घर"
           fill
           className="object-cover"
@@ -40,7 +40,7 @@ export default function HeroSection({ onWhatsAppClick }: HeroSectionProps) {
         {/* Logo */}
         <div className="flex justify-center mb-8">
           <Image
-            src="/images/rslogo.png"
+            src="/images/rsframeslogo.jpg"
             alt="रिद्धी सिद्धी Frames"
             width={400}
             height={400}
@@ -61,12 +61,12 @@ export default function HeroSection({ onWhatsAppClick }: HeroSectionProps) {
         </div>
 
         {/* Heading */}
-        <h1 className="font-serif-deva text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-snug mb-6 max-w-3xl mx-auto">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-snug mb-6 max-w-3xl mx-auto">
           काही प्रतिमा फक्त दिसत नाहीत, त्या मनात वसतात!
         </h1>
 
         {/* Description */}
-        <p className="font-sans-deva text-sm sm:text-base md:text-lg text-white/85 max-w-2xl mx-auto mb-10 leading-relaxed">
+        <p className="font-sans-deva text-sm sm:text-base md:text-lg text-white max-w-2xl mx-auto mb-10 leading-relaxed">
           आपल्या श्रद्धेच्या, भक्तीच्या आणि प्रेरणेच्या भावना जपणाऱ्या सुंदर
           फ्रेम्स. आपल्या घराला द्या एक खास आध्यात्मिक स्पर्श.
         </p>

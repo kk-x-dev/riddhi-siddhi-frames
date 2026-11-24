@@ -43,7 +43,7 @@ export default function Footer({ onWhatsAppClick }: FooterProps) {
           <div className="lg:col-span-1">
             <div className="mb-4">
               <Image
-                src="/images/rslogo.png"
+                src="/images/rsframeslogo.jpg"
                 alt="रिद्धी सिद्धी Frames"
                 width={200}
                 height={200}
