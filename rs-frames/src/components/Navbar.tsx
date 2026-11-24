@@ -15,6 +15,7 @@ const navLinks = [
   { label: "All Frames", href: "#collection" },
   { label: "Our Story", href: "#about" },
   { label: "Services", href: "#services" },
+  { label: "Contact", href: "#contact" },
 ];
 
 export default function Navbar({ onSearch, searchQuery }: NavbarProps) {

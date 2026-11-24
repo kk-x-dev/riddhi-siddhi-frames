@@ -12,7 +12,7 @@ export default function AboutSection() {
                 src="/images/about-home.jpg"
                 alt="सुंदर भारतीय घरातील देवघर"
                 fill
-                className="object-cover"
+                className="relative z-10 object-cover hover:scale-105 transition-transform duration-500"
                 sizes="(max-width: 768px) 100vw, 40vw"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;

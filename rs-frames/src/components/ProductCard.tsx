@@ -23,7 +23,7 @@ export default function ProductCard({
           src={product.image}
           alt={product.name}
           fill
-          className="object-cover group-hover:scale-105 transition-transform duration-500"
+          className="z-10 relative object-cover group-hover:scale-105 transition-transform duration-500"
           sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 25vw"
           onError={(e) => {
             const target = e.target as HTMLImageElement;

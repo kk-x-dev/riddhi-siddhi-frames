@@ -66,7 +66,7 @@ export default function HeroSection({ onWhatsAppClick }: HeroSectionProps) {
         </h1>
 
         {/* Description */}
-        <p className="font-sans-deva text-sm sm:text-base md:text-lg text-white max-w-2xl mx-auto mb-10 leading-relaxed">
+        <p className="font-sans-deva text-sm sm:text-base md:text-lg text-white! max-w-2xl mx-auto mb-10 leading-relaxed">
           आपल्या श्रद्धेच्या, भक्तीच्या आणि प्रेरणेच्या भावना जपणाऱ्या सुंदर
           फ्रेम्स. आपल्या घराला द्या एक खास आध्यात्मिक स्पर्श.
         </p>

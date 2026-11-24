@@ -1,6 +1,6 @@
 "use client";
 
-import { MessageCircle } from "lucide-react";
+import { MessageCircle, MapPin } from "lucide-react";
 import { LuInstagram } from "react-icons/lu";
 import Image from "next/image";
 
@@ -13,6 +13,7 @@ const quickLinks = [
   { label: "All Frames", href: "#collection" },
   { label: "Our Story", href: "#about" },
   { label: "Services", href: "#services" },
+  { label: "Contact", href: "#contact" },
 ];
 
 const infoLinks = [
@@ -36,7 +37,7 @@ export default function Footer({ onWhatsAppClick }: FooterProps) {
   };
 
   return (
-    <footer className="border-t border-border mt-auto">
+    <footer id="contact" className="border-t border-border mt-auto">
       <div className="max-w-[1280px] mx-auto px-4 md:px-6 lg:px-8 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
           {/* Brand */}
@@ -137,7 +138,34 @@ export default function Footer({ onWhatsAppClick }: FooterProps) {
                   @{instagramProfile}
                 </a>
               )}
+              {/* Address */}
+              <div className="flex items-start gap-2 text-sm text-secondary">
+                <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                <span className="leading-relaxed">
+                  Manaji Nagar, Narhe, Pune,<br />
+                  Maharashtra, India
+                </span>
+              </div>
             </div>
+          </div>
+        </div>
+
+        {/* Google Map */}
+        <div className="mt-10 pt-6 border-t border-border">
+          <h4 className="text-sm font-bold text-foreground mb-4">
+            Find Us
+          </h4>
+          <div className="w-full overflow-hidden border border-border">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2250.3701051604985!2d73.82155355307806!3d18.453907680630483!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc295394b4c04db%3A0x279df7d1057a07bd!2sManajinagar%20Ganpati%20Mandir!5e0!3m2!1sen!2sin!4v1795522641675!5m2!1sen!2sin" width="100%"
+              height="250"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="रिद्धी सिद्धी Frames — Manaji Nagar, Narhe, Pune"
+              className="w-full h-[200px] md:h-[250px]"
+            />
           </div>
         </div>
 

@@ -48,9 +48,6 @@ h3, h4, h5, h6 {
   color:#A6532D;
 }
 
-p{
-  color:var(--accent-secondary)
-}
 
 /* Scrollbar styling */
 ::-webkit-scrollbar {
