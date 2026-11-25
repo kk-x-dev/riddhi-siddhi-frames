@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import { AnimatePresence } from "motion/react";
 import { Product } from "@/types/product";
 import { products } from "@/data/products";
 import AnnouncementBar from "@/components/AnnouncementBar";
@@ -88,24 +89,28 @@ export default function Home() {
       {/* Section 07 — Footer */}
       <Footer onWhatsAppClick={handleWhatsAppChat} />
 
-      {/* Modals */}
-      {showProductDetail && selectedProduct && (
-        <ProductDetail
-          product={selectedProduct}
-          onClose={() => setShowProductDetail(false)}
-          onBuy={() => handleBuyProduct(selectedProduct)}
-        />
-      )}
+      {/* Modals with smooth entrance and exit */}
+      <AnimatePresence>
+        {showProductDetail && selectedProduct && (
+          <ProductDetail
+            product={selectedProduct}
+            onClose={() => setShowProductDetail(false)}
+            onBuy={() => handleBuyProduct(selectedProduct)}
+          />
+        )}
+      </AnimatePresence>
 
-      {showOrderForm && (
-        <OrderForm
-          selectedProduct={orderProduct}
-          onClose={() => {
-            setShowOrderForm(false);
-            setOrderProduct(null);
-          }}
-        />
-      )}
+      <AnimatePresence>
+        {showOrderForm && (
+          <OrderForm
+            selectedProduct={orderProduct}
+            onClose={() => {
+              setShowOrderForm(false);
+              setOrderProduct(null);
+            }}
+          />
+        )}
+      </AnimatePresence>
     </>
   );
 }

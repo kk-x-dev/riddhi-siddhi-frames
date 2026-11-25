@@ -1,18 +1,27 @@
+"use client";
+
+import { motion } from "motion/react";
 import Image from "next/image";
 
 export default function AboutSection() {
   return (
-    <section id="about" className="py-16 md:py-24 border-t border-border">
+    <section id="about" className="py-16 md:py-24 border-t border-border overflow-hidden">
       <div className="max-w-[1280px] mx-auto px-4 md:px-6 lg:px-8">
         <div className="md:flex md:items-start md:gap-12 lg:gap-16">
-          {/* Image */}
-          <div className="md:w-5/12 mb-8 md:mb-0">
-            <div className="relative aspect-[4/5] bg-[#EDE8DC] border border-border overflow-hidden">
+          {/* Image with scroll reveal */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="md:w-5/12 mb-8 md:mb-0"
+          >
+            <div className="relative aspect-[5/4] bg-[#EDE8DC] border border-border overflow-hidden group">
               <Image
                 src="/images/about-home.jpg"
                 alt="सुंदर भारतीय घरातील देवघर"
                 fill
-                className="relative z-10 object-cover hover:scale-105 transition-transform duration-500"
+                className="relative z-10 object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                 sizes="(max-width: 768px) 100vw, 40vw"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
@@ -25,10 +34,16 @@ export default function AboutSection() {
                 </span>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Content */}
-          <div className="md:w-7/12">
+          {/* Content with scroll reveal */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            className="md:w-7/12"
+          >
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6">
               आमची छोटीशी गोष्ट...
             </h2>
@@ -58,7 +73,7 @@ export default function AboutSection() {
                 तुमची श्रद्धा, तुमची आवड... आणि आमची मनापासून केलेली निवड!
               </p>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

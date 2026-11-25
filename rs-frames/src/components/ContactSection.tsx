@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "motion/react";
 import { MessageCircle } from "lucide-react";
 import { LuInstagram } from "react-icons/lu";
 
@@ -15,8 +16,14 @@ export default function ServicesSection({
   return (
     <section id="services" className="py-16 md:py-24 border-t border-border">
       <div className="max-w-[1280px] mx-auto px-4 md:px-6 lg:px-8">
-        <div className="max-w-2xl mx-auto text-center border border-border bg-card p-8 md:p-12">
-          <h2 className=" text-2xl sm:text-3xl md:text-4xl font-bold  mb-4">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-2xl mx-auto text-center border border-border bg-card p-8 md:p-12"
+        >
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             तुमच्या मनात काही प्रश्न आहेत का?
           </h2>
 
@@ -32,16 +39,20 @@ export default function ServicesSection({
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button
+            <motion.button
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
               onClick={onWhatsAppClick}
-              className="inline-flex items-center gap-2 bg-btn text-btn-text px-8 py-3.5 text-sm font-sans-deva font-medium hover:bg-foreground transition-colors"
+              className="cursor-pointer inline-flex items-center gap-2 bg-btn text-btn-text px-8 py-3.5 text-sm font-sans-deva font-medium hover:bg-foreground transition-colors"
             >
               <MessageCircle className="w-4 h-4" />
               WhatsApp वर बोला
-            </button>
+            </motion.button>
 
             {instagramProfile && (
-              <a
+              <motion.a
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
                 href={`https://www.instagram.com/${instagramProfile}`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -49,10 +60,10 @@ export default function ServicesSection({
               >
                 <LuInstagram className="w-4 h-4" />
                 @{instagramProfile}
-              </a>
+              </motion.a>
             )}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
