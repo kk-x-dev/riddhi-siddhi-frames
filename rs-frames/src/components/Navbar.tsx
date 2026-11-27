@@ -1,14 +1,15 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, Search } from "lucide-react";
 import { LuInstagram } from "react-icons/lu";
 import Image from "next/image";
 
 interface NavbarProps {
-  onSearch: (query: string) => void;
-  searchQuery: string;
+  onSearch?: (query: string) => void;
+  searchQuery?: string;
 }
 
 const navLinks = [
@@ -19,10 +20,15 @@ const navLinks = [
   { label: "Contact", href: "#contact" },
 ];
 
-export default function Navbar({ onSearch, searchQuery }: NavbarProps) {
+export default function Navbar({
+  onSearch = () => {},
+  searchQuery = "",
+}: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const pathname = usePathname();
+  const router = useRouter();
 
   const instagramProfile = process.env.NEXT_PUBLIC_INSTAGRAM_PROFILE || "";
 
@@ -35,12 +41,18 @@ export default function Navbar({ onSearch, searchQuery }: NavbarProps) {
   const handleNavClick = (href: string) => {
     setIsMenuOpen(false);
     if (href === "#") {
+      if (pathname !== "/") {
+        router.push("/");
+        return;
+      }
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
     const el = document.querySelector(href);
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
+    } else {
+      router.push(`/${href}`);
     }
   };
 

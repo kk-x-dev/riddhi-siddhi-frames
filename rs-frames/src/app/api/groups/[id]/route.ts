@@ -15,12 +15,11 @@ interface RouteContext {
 export async function GET(_req: NextRequest, context: RouteContext) {
   try {
     const { id } = await context.params;
-    if (!isValidObjectId(id)) {
-      return NextResponse.json({ ok: false, error: "Invalid group ID." }, { status: 400 });
-    }
-
     const groups = await getGroupsCollection();
-    const group = await groups.findOne({ _id: new ObjectId(id) });
+
+    const group = isValidObjectId(id)
+      ? await groups.findOne({ _id: new ObjectId(id) })
+      : await groups.findOne({ slug: id });
 
     if (!group) {
       return NextResponse.json({ ok: false, error: "Group not found." }, { status: 404 });

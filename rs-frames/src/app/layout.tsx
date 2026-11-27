@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "रिद्धी सिद्धी Frames — श्रद्धा, प्रेरणा आणि आपुलकीचा सुंदर संगम",
@@ -14,7 +15,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="mr" className="h-full antialiased">
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <Toaster position="top-right" />
+        {children}
+      </body>
     </html>
   );
 }

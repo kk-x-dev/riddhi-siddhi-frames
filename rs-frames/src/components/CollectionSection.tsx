@@ -1,33 +1,35 @@
 "use client";
 
 import { motion, AnimatePresence } from "motion/react";
-import { Product } from "@/types/product";
+import type { Group } from "@/types/group";
 import ProductCard from "./ProductCard";
 
 interface CollectionSectionProps {
-  products: Product[];
+  groups: Group[];
+  loading?: boolean;
+  error?: string;
+  onRetry?: () => void;
   searchQuery: string;
   onClearSearch: () => void;
-  onViewProduct: (product: Product) => void;
-  onBuyProduct: (product: Product) => void;
 }
 
 export default function CollectionSection({
-  products,
+  groups,
+  loading = false,
+  error = "",
+  onRetry,
   searchQuery,
   onClearSearch,
-  onViewProduct,
-  onBuyProduct,
 }: CollectionSectionProps) {
-  const filteredProducts = searchQuery.trim()
-    ? products.filter((product) => {
+  const filteredGroups = searchQuery.trim()
+    ? groups.filter((group) => {
         const query = searchQuery.toLowerCase();
         return (
-          product.name.toLowerCase().includes(query) ||
-          product.description.toLowerCase().includes(query)
+          group.name.toLowerCase().includes(query) ||
+          (group.description ?? "").toLowerCase().includes(query)
         );
       })
-    : products;
+    : groups;
 
   return (
     <section id="collection" className="py-16 md:py-24">
@@ -72,30 +74,65 @@ export default function CollectionSection({
           )}
         </AnimatePresence>
 
-        {/* Product Grid */}
-        {filteredProducts.length > 0 ? (
+        {/* Loading State */}
+        {loading && (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-            {filteredProducts.map((product, index) => (
-              <ProductCard
-                key={product.id}
-                index={index}
-                product={product}
-                onView={() => onViewProduct(product)}
-                onBuy={() => onBuyProduct(product)}
-              />
+            {[1, 2, 3, 4].map((item) => (
+              <div
+                key={item}
+                className="bg-card border border-border animate-pulse"
+              >
+                <div className="aspect-[3/4] bg-[#EDE8DC]" />
+                <div className="p-3 md:p-4 space-y-2.5">
+                  <div className="h-4 w-3/4 bg-[#EDE8DC]" />
+                  <div className="h-3 w-full bg-[#EDE8DC]" />
+                  <div className="h-8 w-full bg-[#EDE8DC] mt-3" />
+                </div>
+              </div>
             ))}
           </div>
-        ) : (
+        )}
+
+        {/* Error State */}
+        {!loading && error && (
+          <div className="text-center py-12">
+            <p className="text-sm text-secondary mb-4">{error}</p>
+            {onRetry && (
+              <button
+                onClick={onRetry}
+                className="bg-btn text-btn-text px-6 py-2.5 text-sm hover:bg-foreground transition-colors cursor-pointer"
+              >
+                Retry
+              </button>
+            )}
+          </div>
+        )}
+
+        {/* Product / Group Grid */}
+        {!loading && !error && filteredGroups.length > 0 && (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+            {filteredGroups.map((group, index) => (
+              <ProductCard key={group._id} index={index} group={group} />
+            ))}
+          </div>
+        )}
+
+        {/* Empty Search / Empty Collection */}
+        {!loading && !error && filteredGroups.length === 0 && (
           <div className="text-center py-16">
             <p className="font-sans-deva text-base text-secondary mb-4">
-              माफ करा, तुमच्या शोधाशी जुळणारी फ्रेम सापडली नाही.
+              {searchQuery.trim()
+                ? "माफ करा, तुमच्या शोधाशी जुळणारी फ्रेम सापडली नाही."
+                : "सध्या कोणतेही कलेक्शन उपलब्ध नाही."}
             </p>
-            <button
-              onClick={onClearSearch}
-              className="bg-btn text-btn-text px-6 py-2.5 text-sm hover:bg-foreground transition-colors cursor-pointer"
-            >
-              View All Frames
-            </button>
+            {searchQuery.trim() && (
+              <button
+                onClick={onClearSearch}
+                className="bg-btn text-btn-text px-6 py-2.5 text-sm hover:bg-foreground transition-colors cursor-pointer"
+              >
+                View All Frames
+              </button>
+            )}
           </div>
         )}
       </div>

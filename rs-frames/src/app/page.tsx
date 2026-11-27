@@ -1,25 +1,63 @@
 "use client";
 
-import { useState, useCallback } from "react";
-import { AnimatePresence } from "motion/react";
-import { Product } from "@/types/product";
-import { products } from "@/data/products";
+import { useState, useCallback, useEffect } from "react";
+import type { Group } from "@/types/group";
+import { fetchGroups } from "@/lib/api/groups";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import CollectionSection from "@/components/CollectionSection";
-import ProductDetail from "@/components/ProductDetail";
-import OrderForm from "@/components/OrderForm";
 import AboutSection from "@/components/AboutSection";
 import ServicesSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [showProductDetail, setShowProductDetail] = useState(false);
-  const [showOrderForm, setShowOrderForm] = useState(false);
-  const [orderProduct, setOrderProduct] = useState<Product | null>(null);
+  const [groups, setGroups] = useState<Group[]>([]);
+  const [loadingGroups, setLoadingGroups] = useState(true);
+  const [groupsError, setGroupsError] = useState("");
+
+  const loadGroups = useCallback(async () => {
+    setLoadingGroups(true);
+    setGroupsError("");
+    try {
+      const data = await fetchGroups();
+      setGroups(data);
+    } catch (err) {
+      setGroupsError(
+        err instanceof Error ? err.message : "Failed to load collections."
+      );
+    } finally {
+      setLoadingGroups(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    let active = true;
+
+    async function init() {
+      try {
+        const data = await fetchGroups();
+        if (!active) return;
+        setGroups(data);
+        setGroupsError("");
+      } catch (err) {
+        if (!active) return;
+        setGroupsError(
+          err instanceof Error ? err.message : "Failed to load collections."
+        );
+      } finally {
+        if (active) {
+          setLoadingGroups(false);
+        }
+      }
+    }
+
+    void init();
+    return () => {
+      active = false;
+    };
+  }, []);
 
   const handleSearch = useCallback((query: string) => {
     setSearchQuery(query);
@@ -33,17 +71,6 @@ export default function Home() {
 
   const handleClearSearch = useCallback(() => {
     setSearchQuery("");
-  }, []);
-
-  const handleViewProduct = useCallback((product: Product) => {
-    setSelectedProduct(product);
-    setShowProductDetail(true);
-  }, []);
-
-  const handleBuyProduct = useCallback((product: Product) => {
-    setOrderProduct(product);
-    setShowOrderForm(true);
-    setShowProductDetail(false);
   }, []);
 
   const handleWhatsAppChat = useCallback(async () => {
@@ -72,11 +99,12 @@ export default function Home() {
 
         {/* Section 04 — Collection / All Frames */}
         <CollectionSection
-          products={products}
+          groups={groups}
+          loading={loadingGroups}
+          error={groupsError}
+          onRetry={loadGroups}
           searchQuery={searchQuery}
           onClearSearch={handleClearSearch}
-          onViewProduct={handleViewProduct}
-          onBuyProduct={handleBuyProduct}
         />
 
         {/* Section 05 — About / Emotional Brand Section */}
@@ -88,29 +116,6 @@ export default function Home() {
 
       {/* Section 07 — Footer */}
       <Footer onWhatsAppClick={handleWhatsAppChat} />
-
-      {/* Modals with smooth entrance and exit */}
-      <AnimatePresence>
-        {showProductDetail && selectedProduct && (
-          <ProductDetail
-            product={selectedProduct}
-            onClose={() => setShowProductDetail(false)}
-            onBuy={() => handleBuyProduct(selectedProduct)}
-          />
-        )}
-      </AnimatePresence>
-
-      <AnimatePresence>
-        {showOrderForm && (
-          <OrderForm
-            selectedProduct={orderProduct}
-            onClose={() => {
-              setShowOrderForm(false);
-              setOrderProduct(null);
-            }}
-          />
-        )}
-      </AnimatePresence>
     </>
   );
 }
