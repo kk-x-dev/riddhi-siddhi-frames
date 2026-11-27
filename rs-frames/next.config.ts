@@ -5,6 +5,14 @@ const nextConfig: NextConfig = {
   experimental: {
     agentFeedback: true,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
+    ],
+  },
   allowedDevOrigins: ['10.250.97.78'],
   cacheComponents: true,
   partialPrefetching: true,
