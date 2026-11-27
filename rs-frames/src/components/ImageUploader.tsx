@@ -1,7 +1,13 @@
 "use client";
 
-import { CldUploadWidget, getCldImageUrl } from "next-cloudinary";
+import dynamic from "next/dynamic";
+import { getCldImageUrl } from "next-cloudinary";
 import { Upload } from "lucide-react";
+
+const CldUploadWidget = dynamic(
+  () => import("next-cloudinary").then((mod) => mod.CldUploadWidget),
+  { ssr: false }
+);
 
 interface ImageUploaderProps {
   value: string;

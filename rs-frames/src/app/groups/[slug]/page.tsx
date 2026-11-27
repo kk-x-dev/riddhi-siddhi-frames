@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { Suspense, useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
@@ -10,6 +10,20 @@ import Footer from "@/components/Footer";
 import type { Group } from "@/types/group";
 
 export default function GroupDetailPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="py-12">
+          <div className="h-9 w-64 bg-[#EDE8DC] animate-pulse" />
+        </div>
+      }
+    >
+      <GroupDetailContent />
+    </Suspense>
+  );
+}
+
+function GroupDetailContent() {
   const params = useParams<{ slug: string }>();
   const slug = params?.slug ? decodeURIComponent(params.slug) : "";
 
